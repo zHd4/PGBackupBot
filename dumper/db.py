@@ -18,3 +18,9 @@ class Database:
 
 def get_connection():
     return Database(config.pg_host, config.pg_port, config.pg_login, config.pg_password, 'postgres')
+
+
+# noinspection SqlDialectInspection,SqlNoDataSourceInspection
+def get_databases(connection):
+    cursor = connection.cursor()
+    cursor.execute("SELECT datname FROM pg_database")  # postgres template0 template1
