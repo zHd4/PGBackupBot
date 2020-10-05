@@ -23,7 +23,7 @@ def get_connection():
 # noinspection SqlDialectInspection,SqlNoDataSourceInspection
 def get_databases(connection):
     cursor = connection.cursor()
-    cursor.execute("SELECT datname FROM pg_database")  # postgres template0 template1
+    cursor.execute("SELECT datname FROM pg_database")
 
     databases = []
 
