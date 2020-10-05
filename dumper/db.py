@@ -24,3 +24,11 @@ def get_connection():
 def get_databases(connection):
     cursor = connection.cursor()
     cursor.execute("SELECT datname FROM pg_database")  # postgres template0 template1
+
+    databases = []
+
+    for db in cursor.fetchall():
+        db = str(db[0])
+
+        if db is not 'postgres' or 'template0' or 'template1':
+            databases.append(db)
