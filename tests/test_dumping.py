@@ -5,7 +5,7 @@ from dumper import Dumper, db
 
 
 class TestDumpingDatabases(unittest.TestCase):
-    def test_dumpimg(self):
+    def test_dumping(self):
         dump_handler = Dumper(config.backups_path, db.get_connection())
         dumps = dump_handler.dump()
 
@@ -17,7 +17,7 @@ class TestDumpingDatabases(unittest.TestCase):
             '%s dir must be contains backups' % config.backups_path
         )
 
-        # dump_handler.clear()
+        dump_handler.clear()
 
 
 if __name__ == '__main__':

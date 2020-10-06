@@ -1,5 +1,4 @@
 import os
-import subprocess
 from dumper import env, db
 from dumper.exceptions.no_root_privileges_exception import NoRootPrivilegesException
 
@@ -39,12 +38,12 @@ class Dumper:
         db_file_path = os.path.join(path, db_name + '.backup')
         backup_command = 'sudo -u postgres pg_dump %s > %s' % (db_name, db_file_path)
 
-        self.__execute_shell_command(backup_command.split(' '))
+        self.__execute_shell_command(backup_command)
 
         return db_file_path
 
     def __execute_shell_command(self, command):
-        return subprocess.run(command, stdout=subprocess.PIPE)
+        return os.system(command)
 
     def __check_path(self, path):
         if not os.path.exists(path):

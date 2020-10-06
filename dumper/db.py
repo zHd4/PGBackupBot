@@ -30,7 +30,7 @@ def get_databases(connection):
     for db in cursor.fetchall():
         db = str(db[0])
 
-        if db is not 'postgres' or 'template0' or 'template1':
+        if db != 'postgres' and db != 'template0' and db != 'template1':
             databases.append(db)
 
     return databases
