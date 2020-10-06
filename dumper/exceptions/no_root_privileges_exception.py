@@ -1,0 +1,2 @@
+class NoRootPrivilegesException(Exception):
+    pass
