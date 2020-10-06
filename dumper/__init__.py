@@ -10,6 +10,8 @@ class Dumper:
         self.__path = path
         self.__db_conn = db_connection
 
+        self.__check_path(path)
+
     def dump(self):
         paths = []
 
