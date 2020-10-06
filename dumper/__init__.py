@@ -1,13 +1,25 @@
 import os
 import subprocess
 from dumper import env, db
+from dumper.exceptions.no_root_privileges_exception import NoRootPrivilegesException
 
 
 # noinspection PyMethodMayBeStatic
 class Dumper:
+    def __init__(self, path, db_connection):
+        self.__path = path
+        self.__db_conn = db_connection
+
     def dump(self):
-        for db_name in db.get_databases(db.get_connection()):
-            pass
+        paths = []
+
+        for db_name in db.get_databases(self.__db_conn):
+            path = self.dump_db(self.__path, db_name)
+
+            if db_name is not None:
+                paths.append(path)
+            else:
+                raise NoRootPrivilegesException()
 
     def dump_db(self, path, db_name):
         if not env.check_root():
@@ -24,4 +36,4 @@ class Dumper:
         return subprocess.run(command, stdout=subprocess.PIPE)
 
     def check_path(self, path):
-        return os.path.exists(self, path)
+        return os.path.exists(path)
