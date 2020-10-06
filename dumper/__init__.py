@@ -8,6 +8,7 @@ from dumper.exceptions.no_root_privileges_exception import NoRootPrivilegesExcep
 class Dumper:
     def __init__(self, path, db_connection):
         self.__path = path
+        self.__paths_of_dumped_dbs = []
         self.__db_conn = db_connection
 
         self.__check_path(path)
@@ -22,6 +23,12 @@ class Dumper:
                 paths.append(path)
             else:
                 raise NoRootPrivilegesException()
+
+        self.__paths_of_dumped_dbs = paths
+
+    def clear(self):
+        for path in self.__paths_of_dumped_dbs:
+            os.remove(path)
 
     def __dump_db(self, path, db_name):
         if not env.check_root():
