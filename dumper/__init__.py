@@ -36,4 +36,5 @@ class Dumper:
         return subprocess.run(command, stdout=subprocess.PIPE)
 
     def __check_path(self, path):
-        return os.path.exists(path)
+        if not os.path.exists(path):
+            os.mkdir(path)
