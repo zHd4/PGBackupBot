@@ -17,7 +17,7 @@ class TestDumpingDatabases(unittest.TestCase):
             '%s dir must be contains backups' % config.backups_path
         )
 
-        dump_handler.clear()
+        # dump_handler.clear()
 
 
 if __name__ == '__main__':

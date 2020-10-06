@@ -19,12 +19,14 @@ class Dumper:
         for db_name in db.get_databases(self.__db_conn):
             path = self.__dump_db(self.__path, db_name)
 
-            if db_name is not None:
+            if path is not None:
                 paths.append(path)
             else:
                 raise NoRootPrivilegesException()
 
         self.__paths_of_dumped_dbs = paths
+
+        return paths
 
     def clear(self):
         for path in self.__paths_of_dumped_dbs:
