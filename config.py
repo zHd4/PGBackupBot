@@ -8,7 +8,7 @@ backups_path = '/tmp/pg_backup_bot_temp'
 
 # noinspection SpellCheckingInspection
 bot_token = '1339540081:AAH6NKlRmwVp21lcEdvh3DlFZCCFdEVrK0I'
-user_chat_id = 461916456
+your_chat_id = 461916456
 
 backup_interval_hour = 1
 
