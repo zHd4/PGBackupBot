@@ -1,9 +1,11 @@
+import os
 import time
 import config
 import asyncio
 from dumper import db
 from aiogram import Bot
 from dumper import Dumper
+from datetime import datetime
 from encryptor import filecrypt
 from dumper.exceptions.no_root_privileges_exception import NoRootPrivilegesException
 
@@ -33,6 +35,12 @@ async def send_backups(bot, dumper):
                 filecrypt.encrypt_file(path, open(config.rsa_public_key_path, 'rb').read(), config.rsa_key_length)
 
             await bot.send_document(config.your_chat_id, open(path, 'rb'))
+
+            print(
+                '[%s] Send backup of %s' %
+                (datetime.now().strftime("%d/%m/%Y %H:%M:%S"), os.path.basename(path).split('.')[0])
+            )
+
             time.sleep(0.5)
 
         dumper.clear()
