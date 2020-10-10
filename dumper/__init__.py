@@ -1,5 +1,6 @@
 import os
 from dumper import env, db
+from datetime import datetime
 from dumper.exceptions.no_root_privileges_exception import NoRootPrivilegesException
 
 
@@ -35,7 +36,7 @@ class Dumper:
         if not env.check_root():
             return None
 
-        db_file_path = os.path.join(path, db_name + '.backup')
+        db_file_path = os.path.join(path, db_name + '_' + datetime.now().strftime("%d-%m-%Y_%H-%M-%S") + '.backup')
         backup_command = 'sudo -u postgres pg_dump %s > %s' % (db_name, db_file_path)
 
         self.__execute_shell_command(backup_command)
