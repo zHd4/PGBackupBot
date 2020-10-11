@@ -36,9 +36,10 @@ async def send_backups(bot, dumper):
 
             await bot.send_document(config.your_chat_id, open(path, 'rb'))
 
-            print(
+            print((
                 '[%s] Send backup of %s' %
-                (datetime.now().strftime("%d/%m/%Y %H:%M:%S"), os.path.basename(path).split('.')[0])
+                (datetime.now().strftime("%d/%m/%Y %H:%M:%S"), os.path.basename(path))) +
+                  (' [encrypted]' if config.enable_rsa_encryption else '')
             )
 
             time.sleep(0.5)
