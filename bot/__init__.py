@@ -16,12 +16,7 @@ def start():
 
     while True:
         loop = asyncio.get_event_loop()
-
-        try:
-            loop.run_until_complete(send_backups(bot, dumper))
-        finally:
-            loop.run_until_complete(loop.shutdown_asyncgens())
-            loop.close()
+        loop.run_until_complete(send_backups(bot, dumper))
 
         time.sleep(config.backup_interval_hour * 60 * 60)
 
